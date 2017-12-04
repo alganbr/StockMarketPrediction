@@ -59,7 +59,7 @@ class LogisticRegression():
         return self
 
 if __name__ == '__main__':
-    timestamps, tweets, likes, labels = pp.extract_data('stocktwits/AMZN_stocktwits.csv')
+    timestamps, tweets, likes, labels = pp.extract_data('stocktwits_training_data/AMZN_stocktwits.csv')
     dictionary = pp.extract_dictionary(tweets)
     X = pp.extract_feature_vectors(tweets, dictionary)
     y = labels

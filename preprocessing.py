@@ -4,8 +4,14 @@ Description: Data preprocessing
 """
 
 import csv
+import re
 import numpy as np
+import nltk
+# nltk.download()   # Uncomment this if this is your first time running nltk to download the corresponding packages
 from string import punctuation
+from nltk.stem import PorterStemmer
+from nltk.corpus import stopwords
+from nltk.tokenize import sent_tokenize, word_tokenize
 
 def sentiment_to_label(sentiments):
     """
@@ -63,6 +69,41 @@ def extract_data(csv_file):
 
     return timestamps, tweets, likes, labels
 
+def remove_stop_words(word_dict):
+    """
+    Removes stop words
+    
+    Parameters
+    --------------------
+        word_dict -- word dictionary
+    
+    Returns
+    --------------------
+        word_dict -- word dictionary with stop words eliminated
+    """
+    stop_words = set(stopwords.words('english'))
+    for stop_word in stop_words:
+        if stop_word in word_dict:
+            del word_dict[stop_word]
+    return word_dict
+
+def remove_punctuations(word_dict):
+    """
+    Removes punctuations
+    
+    Parameters
+    --------------------
+        word_dict -- word dictionary
+    
+    Returns
+    --------------------
+        word_dict -- word dictionary with stop words eliminated
+    """
+    for c in punctuation:
+        if c in word_dict:
+            del word_dict[c]
+    return word_dict
+
 def extract_words(input_string):
     """
     Processes the input_string, separating it into "words" based on the presence
@@ -76,10 +117,20 @@ def extract_words(input_string):
     --------------------
         words        -- list of lowercase "words"
     """
-    
-    for c in punctuation :
-        input_string = input_string.replace(c, ' ' + c + ' ')
-    return input_string.lower().split()
+    # Remove URLs
+    input_string = re.sub(r'(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:\'".,<>?«»“”‘’]))', '', input_string)
+
+    # Tokenize words
+    word_list = word_tokenize(input_string.lower())
+
+    # Remove links
+    word_list = [word for word in word_list if 'www' not in word and 'http' not in word and '//' not in word]
+
+    # Stemming
+    stemmer = PorterStemmer()
+    word_list = [stemmer.stem(word) for word in word_list]
+
+    return word_list
 
 
 def extract_dictionary(tweets):
@@ -104,7 +155,11 @@ def extract_dictionary(tweets):
         words += extract_words(tweet)
     unique_words, counts = np.unique(words, return_counts=True)
     word_list = dict(zip(unique_words, counts))
-
+    # Remove stop words
+    word_list = remove_stop_words(word_list)
+    # Remove punctuations
+    word_list = remove_punctuations(word_list)
+    print(word_list)
     return word_list
 
 def extract_feature_vectors(tweets, word_list):
