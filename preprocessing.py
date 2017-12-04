@@ -106,8 +106,8 @@ def remove_punctuations(word_dict):
 
 def extract_words(input_string):
     """
-    Processes the input_string, separating it into "words" based on the presence
-    of spaces, and separating punctuation marks into their own words.
+    Processes the input_string. Remove all URLs, tokenize words 
+    with nltk word tokenizer and perform stemming.
     
     Parameters
     --------------------
@@ -122,9 +122,6 @@ def extract_words(input_string):
 
     # Tokenize words
     word_list = word_tokenize(input_string.lower())
-
-    # Remove links
-    word_list = [word for word in word_list if 'www' not in word and 'http' not in word and '//' not in word]
 
     # Stemming
     stemmer = PorterStemmer()
@@ -159,7 +156,6 @@ def extract_dictionary(tweets):
     word_list = remove_stop_words(word_list)
     # Remove punctuations
     word_list = remove_punctuations(word_list)
-    print(word_list)
     return word_list
 
 def extract_feature_vectors(tweets, word_list):
@@ -193,5 +189,3 @@ def extract_feature_vectors(tweets, word_list):
                 feature_matrix[i][j] = 1
         
     return feature_matrix
-
-
