@@ -33,33 +33,22 @@ def sentiment_to_label(sentiments):
     labels = np.vectorize(label_dict.get)(sentiments)
     return labels
 
-def preprocess_raw_text_data(csv_file):
+def preprocess_raw_text_data(tweets):
     """
     Read from a csv file and return preprocessed text data (removal of stop words/punctuations and stemming)
 
     Parameters
     --------------------
-        csv_file    -- csv file, file format: 'created_at', 'text'
+        tweets    -- raw tweets
     
     Returns
     --------------------
-        timestamps  -- numpy array of shape (n, 1)
-        tweets  -- numpy array of shape (n, d)
+        processed_tweets  -- numpy array of shape (n, d)
     """
-    matrix = []
-    with open(csv_file, 'r') as f:
-        reader = csv.reader(f, delimiter=',')
-        next(reader) # remove header
-        for row in reader:
-            matrix.append(row)
-
-    data = np.array(matrix)
-    timestamps = data[:,0]
-    tweets = data[:,1]
     processed_tweets = []
     for tweet in tweets:
         processed_tweets.append(extract_words(tweet))
-    return timestamps, processed_tweets
+    return processed_tweets
 
 def extract_data(csv_file):
     """
