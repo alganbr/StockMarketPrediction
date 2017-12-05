@@ -1,7 +1,7 @@
-# stocktwits_api.py
-# ------------------
-# Save classified tweets from stocktwits.com to csv file
-#
+"""
+Author: Algan Rustinya
+Description: Crawl Raw Stocktwits
+"""
 
 import os
 import requests
@@ -68,13 +68,10 @@ def get_relevant_data(json_data):
     ret = []
     tweets = json_data['messages']
     for tweet in tweets:
+        print(tweet['id'])
         relevant_data = dict()
         relevant_data['created_at'] = tweet['created_at']
-        relevant_data['text'] = tweet['body']
-        try:
-            relevant_data['likes'] = tweet['likes']['total']
-        except:
-            relevant_data['likes'] = 0
+        relevant_data['text'] = tweet['body'].replace('\n', ' ')
         try:
             relevant_data['sentiment'] = tweet['entities']['sentiment']['basic']
         except:
@@ -90,7 +87,17 @@ def create_csv(symbol, relevant_data):
         dict_writer.writeheader()
         dict_writer.writerows(relevant_data)
 
-if __name__ == '__main__':
-    symbol = 'AMZN'
-    relevant_data = get_relevant_data(get_stock_stream(symbol))
-    create_csv(symbol, relevant_data)
+def get_stock_stream_wrapper(symbol, quantity):
+    ret = []
+    last_id = None
+    while(quantity > 30):
+        ret += get_relevant_data(get_stock_stream(symbol, params={'max':last_id}))
+        quantity -= 30
+    ret += get_relevant_data(get_stock_stream(symbol, params={'limit':quantity, 'max':last_id}))
+    return ret
+
+
+# if __name__ == '__main__':
+#     symbol = 'AMZN'
+#     relevant_data = get_stock_stream_wrapper(symbol, 300)
+#     create_csv(symbol, relevant_data)
