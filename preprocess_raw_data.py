@@ -16,12 +16,12 @@ import datetime
 
 class Preprocess_Raw_Tweets():
 
-    def __init__(self):
-        self.directories = ['raw_data/AAPL_tweets', 'raw_data/GOOG_tweets', 'raw_data/MSFT_tweets', 'raw_data/AMZN_tweets']
-        self.stocknames = ['AAPL', 'GOOG', 'MSFT', 'AMZN']
-        # self.time_format = "%Y-%m-%dT%H:%M:%SZ"    # this is the time_format for stocktwits tweets
-        self.time_format = "%Y-%m-%d %H:%M:%S"       # this is the time_format for tweeter tweets
+    def __init__(self, is_stocktwits):
+        self.directories = ['raw_data/AAPL_tweets', 'raw_data/GOOG_tweets', 'raw_data/MSFT_tweets', 'raw_data/AMZN_tweets'] if not is_stocktwits else ['stocktwits_training_data/AAPL_stocktwits', 'stocktwits_training_data/GOOG_stocktwits', 'stocktwits_training_data/AMZN_stocktwits']
+        self.stocknames = ['AAPL', 'GOOG', 'AMZN']
+        self.time_format = "%Y-%m-%d %H:%M:%S" if not is_stocktwits else "%Y-%m-%dT%H:%M:%SZ"
         self.literals = self.prepare_literals()
+        self.is_stocktwits = is_stocktwits
 
     def prepare_literals(self):
         literals = ['\\xe2', '\\x9a', '\\x9b', '\\x9c', '\\x9d', '\\x9e', '\\x9f', '\\x8a', '\\x8b', '\\x8c', '\\x8d', '\\x8e',
@@ -52,19 +52,20 @@ class Preprocess_Raw_Tweets():
             # Sort entries
             sorted_matrix = np.array(sorted(matrix, key=lambda matrix: datetime.datetime.strptime(matrix[0],self.time_format)))
             
-            # Remove entries created on dates when market is closed or not in the month of Nov, 2017
-            indices_to_remove = []
-            for ind in range(0,sorted_matrix.shape[0]):
-                entry = sorted_matrix[ind]
-                date = datetime.datetime.strptime(entry[0],self.time_format)
-                if date.month != 11 or date.day == 23 or date.weekday() in [5, 6]:
-                    indices_to_remove.append(ind)
-            sorted_matrix = np.delete(sorted_matrix, indices_to_remove, 0)
+            if self.is_stocktwits is False:
+                # Remove entries created on dates when market is closed or not in the month of Nov, 2017
+                indices_to_remove = []
+                for ind in range(0,sorted_matrix.shape[0]):
+                    entry = sorted_matrix[ind]
+                    date = datetime.datetime.strptime(entry[0],self.time_format)
+                    if date.month != 11 or date.day == 23 or date.weekday() in [5, 6]:
+                        indices_to_remove.append(ind)
+                sorted_matrix = np.delete(sorted_matrix, indices_to_remove, 0)
 
             # Write to csv
             created_at = sorted_matrix[:,0]
             processed_tweets = self.preprocess_raw_text_data(sorted_matrix[:, 1])
-            self.write_to_csv(self.stocknames[csv_files.index(file_list)], created_at, processed_tweets)
+            self.write_to_csv(self.stocknames[csv_files.index(file_list)], created_at, processed_tweets) if not self.is_stocktwits else self.write_to_csv(self.stocknames[csv_files.index(file_list)], created_at, processed_tweets, sorted_matrix[:,2])
 
     def preprocess_raw_text_data(self, tweets):
         """
@@ -122,14 +123,15 @@ class Preprocess_Raw_Tweets():
         word_list = [word for word in word_list if word != "" and word not in punctuation and word not in stop_words]
         return word_list
 
-    def write_to_csv(self, stockname, created_at, processed_tweets):
+    def write_to_csv(self, stockname, created_at, processed_tweets, sentiment):
+        csv_name = 'preprocessed_data/%s_stocktwits.csv' if self.is_stocktwits else 'preprocessed_data/%s_tweets.csv'
         # Write the csv
-        with open('preprocessed_data/%s_tweets.csv' % stockname, 'w') as f:
+        with open(csv_name % stockname, 'w') as f:
             writer = csv.writer(f)
-            writer.writerow(['created_at', 'text'])
-            writer.writerows(np.transpose(np.vstack((created_at, processed_tweets))))
+            writer.writerow(['created_at', 'text']) if not self.is_stocktwits else writer.writerow(['created_at', 'text', 'sentiment'])
+            writer.writerows(np.transpose(np.vstack((created_at, processed_tweets)))) if not self.is_stocktwits else writer.writerows(np.transpose(np.vstack((created_at, processed_tweets, sentiment))))
         pass
 
 if __name__ == '__main__':
-    prt = Preprocess_Raw_Tweets()
+    prt = Preprocess_Raw_Tweets(True)
     prt.preprocess_entries()
