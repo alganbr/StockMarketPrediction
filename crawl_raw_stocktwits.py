@@ -104,6 +104,6 @@ def get_stock_stream_wrapper(symbol, quantity):
     return ret
 
 if __name__ == '__main__':
-    symbol = 'MSFT'
+    symbol = 'GOOG'
     relevant_data = get_stock_stream_wrapper(symbol, 3000)
     create_csv(symbol, relevant_data)

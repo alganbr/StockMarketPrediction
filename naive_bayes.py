@@ -3,7 +3,7 @@
 
 import numpy as np
 import csv
-
+from sklearn.model_selection import train_test_split
 
 class NaiveBayes():
     def __init__(self):
@@ -24,6 +24,8 @@ class NaiveBayes():
         # Collect vocabulary of all documents
         self.vocabulary = list(self.extract_vocabulary(tweets))
 
+        
+        tweets_train, tweets_test = 
         # Count number of classes (sentiments)
         self.unique_classes, class_counts = np.unique(sentiments, return_counts=True)
 
@@ -51,6 +53,9 @@ class NaiveBayes():
         for c in range(0, len(self.unique_classes)):
             for ind in range(0, len(self.vocabulary)):
                 self.beta[c, ind] = (counts_of_unique_word[c, ind] + 1)/(np.sum(counts_of_unique_word[c,:]) + len(self.vocabulary))
+
+    def cross_validation(self, cv_data):
+
 
     def predict(self, csv_file):
         # Use the trained classifer to predict class of a given doc

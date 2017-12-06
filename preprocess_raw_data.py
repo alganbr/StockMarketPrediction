@@ -17,8 +17,8 @@ import datetime
 class Preprocess_Raw_Tweets():
 
     def __init__(self, is_stocktwits):
-        self.directories = ['raw_data/AAPL_tweets', 'raw_data/GOOG_tweets', 'raw_data/MSFT_tweets', 'raw_data/AMZN_tweets'] if not is_stocktwits else ['stocktwits_training_data/AAPL_stocktwits', 'stocktwits_training_data/GOOG_stocktwits', 'stocktwits_training_data/AMZN_stocktwits']
-        self.stocknames = ['AAPL', 'GOOG', 'MSFT', 'AMZN']
+        self.directories = ['raw_data/AAPL_tweets', 'raw_data/GOOG_tweets', 'raw_data/MSFT_tweets', 'raw_data/AMZN_tweets'] if not is_stocktwits else ['stocktwits_training_data/AAPL_stocktwits', 'stocktwits_training_data/GOOG_stocktwits', 'stocktwits_training_data/MSFT_stocktwits', 'stocktwits_training_data/AMZN_stocktwits']
+        self.stocknames = ['AAPL','GOOG', 'MSFT', 'AMZN']
         self.time_format = "%Y-%m-%d %H:%M:%S" if not is_stocktwits else "%Y-%m-%dT%H:%M:%SZ"
         self.literals = self.prepare_literals()
         self.is_stocktwits = is_stocktwits
@@ -40,10 +40,12 @@ class Preprocess_Raw_Tweets():
         for file_list in csv_files:
             matrix = [] # Data matrix that will store all tweets related to one stock
             for file in file_list:
+                print(file)
                 with open(file, 'r') as f:
                     reader = csv.reader(f, delimiter=',')
                     next(reader)
                     for row in reader:
+                        print(row)
                         matrix.append(row)
     
             # Avoid duplicate entries
@@ -52,8 +54,8 @@ class Preprocess_Raw_Tweets():
             # Sort entries
             sorted_matrix = np.array(sorted(matrix, key=lambda matrix: datetime.datetime.strptime(matrix[0],self.time_format)))
             
-            if self.is_stocktwits is False:
-                # Remove entries created on dates when market is closed or not in the month of Nov, 2017
+            # Remove entries created on dates when market is closed or not in the month of Nov, 2017
+            if not self.is_stocktwits:
                 indices_to_remove = []
                 for ind in range(0,sorted_matrix.shape[0]):
                     entry = sorted_matrix[ind]
@@ -61,10 +63,12 @@ class Preprocess_Raw_Tweets():
                     if date.month != 11 or date.day == 23 or date.weekday() in [5, 6]:
                         indices_to_remove.append(ind)
                 sorted_matrix = np.delete(sorted_matrix, indices_to_remove, 0)
-            else:
-                # Change stocktwits label to -1, 0, 1 (Bearish, Neutral, Bullish)
+        
+            # Change stocktwits label to -1, 0, 1 (Bearish, Neutral, Bullish)
+            if self.is_stocktwits:
                 label_dict = {'Bearish': -1, 'Bullish': 1, 'Neutral': 0}
                 sentiments = np.vectorize(label_dict.get)(sorted_matrix[:,2])
+
             # Write to csv
             created_at = sorted_matrix[:,0]
             processed_tweets = self.preprocess_raw_text_data(sorted_matrix[:, 1])
@@ -104,6 +108,11 @@ class Preprocess_Raw_Tweets():
         # Remove linebreaks and initial ' b' ' in tweets
         input_string = input_string[2:].replace('\\n', ' ')
 
+        # To prevent catastraphic backtracking of regex below, take out words that start with https first
+        input_substring = input_string.split(' ')
+        input_substring = [substring for substring in input_substring if 'https' not in substring and 'www' not in substring]
+        input_string = ' '.join(input_substring)
+        
         # Remove URLs
         input_string = re.sub(r'(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:\'".,<>?«»“”‘’]))', '', input_string)
 

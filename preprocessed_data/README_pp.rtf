@@ -9,4 +9,6 @@
 \
 1. Tweets created on days when market is closed are pruned.\
 2. Tweets preprocessed are labeled with sentiment (-1=bearish, 1=bullish, 0=neutral)\
-3. Content of tweets, aka \'91text\'92, should be reduced to only a set of vocabulary}
+3. Content of tweets, aka \'91text\'92, should be reduced to only a set of words\
+4. Only keeping tweets in the month of Nov, 2017.\
+5. Remove line breaks, initial byte, URLs and unicode literals from sentences, which are then tokenized into words. Performs stemming on these words, then further remove words that are stop words, punctuations or include non-characters.}
