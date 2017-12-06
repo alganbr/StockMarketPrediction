@@ -3,7 +3,7 @@
 
 import numpy as np
 import csv
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import KFold
 
 class NaiveBayes():
     def __init__(self):
@@ -11,21 +11,71 @@ class NaiveBayes():
         self.pi = []
         self.vocabulary = []
         self.unique_classes = []
+        self.kf_split_indices = []
+        self.k_fold_num = 10
 
-    def train_classifer(self, csv_file):
-        # Train the classifer based on training sets in csv_file
+    def prepare_cross_validation(self, sorted_data_matrix):
+        """
+        Split sorted training data matrix into k-fold, k == self.k_fold_num
+        NoReturn
+        """       
+        # Split data into kfold
+        kf = KFold(n_splits=self.k_fold_num, shuffle=True)
+        self.kf_split_indices = np.empty([len(self.unique_classes), 10], dtype=object)
+
+        for c in range(0, len(self.unique_classes)):
+            sorted_data = np.array(sorted_data_matrix[c][0,:]).transpose()
+            # k-fold split each class because want to make sure number of each classes are evenly distributed
+            k_iter = 0
+            for train_index, test_index in kf.split(sorted_data):
+                self.kf_split_indices[c, k_iter] = [train_index, test_index]
+                k_iter += 1
+
+    def sort_data_matrix(self, data_matrix):
+        """
+        Input
+            - data_matrix: 2 x n matrix, where n is the number of examples,
+                and class labels are in the second row
+        Output
+            - sorted_matrix_list: list of 2 x m matrix, where m is the number
+                of examples in each corresponding class
+        """
+
+        # Sort data based on class
+        sorted_matrix_list = []
+        for ind in range(0, len(self.unique_classes)):
+            indices = np.where(data_matrix[1,:] == self.unique_classes[ind])
+            sorted_matrix_list.append(data_matrix[:,indices])
+        return sorted_matrix_list
+
+    def calculate_model_coeff(self, training_set_list):
+
+        # Calculate number of each unique word for each class
+        counts_of_unique_word = np.zeros([len(self.unique_classes), len(self.vocabulary)])
+        for i in range(0, len(self.unique_classes)):
+            doc_set = training_set_list[0,i]
+            flattened_doc = [word for sublist in doc_set for word in sublist]
+            unique_words, word_counts = np.unique(flattened_doc, return_counts=True)
+            for j in range(0, len(unique_words)):
+                counts_of_unique_word[i, self.vocabulary.index(unique_words[j])] = word_counts[j]
+
+        beta = np.zeros([len(self.unique_classes), len(self.vocabulary)])
+        # Calculate beta values for every word in vocabulary
+        for c in range(0, len(self.unique_classes)):
+            for ind in range(0, len(self.vocabulary)):
+                self.beta[c, ind] += (counts_of_unique_word[c, ind] + 1)/(np.sum(counts_of_unique_word[c,:]) + len(self.vocabulary))
+                beta[c, ind] += (counts_of_unique_word[c, ind] + 1)/(np.sum(counts_of_unique_word[c,:]) + len(self.vocabulary)) # Local copy for cv purpose
+        return beta
+
+    def train_classifer(self, training_set_file):
+        # Train the classifer based on training sets in training_set_file
 
         # Read data
-        _, tweets, sentiments = self.extract_data(csv_file)
-
-        # Convert 'str1,str2,str3' to list[str1, str2, str3]
-        tweets = [tweet.split(',') for tweet in tweets]
+        _, tweets, sentiments = self.extract_data(training_set_file)
 
         # Collect vocabulary of all documents
         self.vocabulary = list(self.extract_vocabulary(tweets))
 
-        
-        tweets_train, tweets_test = 
         # Count number of classes (sentiments)
         self.unique_classes, class_counts = np.unique(sentiments, return_counts=True)
 
@@ -34,48 +84,81 @@ class NaiveBayes():
 
         # Sort data based on class
         data_matrix = np.vstack((tweets, sentiments))
-        sorted_matrix_list = []
-        for ind in range(0, len(self.unique_classes)):
-            indices = np.where(data_matrix[1,:] == self.unique_classes[ind])
-            sorted_matrix_list.append(data_matrix[:,indices])
-    
-        # Calculate number of each unique word for each class
-        counts_of_unique_word = np.zeros([len(self.unique_classes), len(self.vocabulary)])
-        for i in range(0, len(sorted_matrix_list)):
-            doc_set = sorted_matrix_list[i]
-            flattened_doc = [word for sublist in doc_set[0] for sublist2 in sublist for word in sublist2]
-            unique_words, word_counts = np.unique(flattened_doc, return_counts=True)
-            for j in range(0, len(unique_words)):
-                counts_of_unique_word[i, self.vocabulary.index(unique_words[j])] = word_counts[j]
+        sorted_matrix_list = self.sort_data_matrix(data_matrix)
 
-        # Calculate beta values for every word in vocabulary
+        # Prepare for cross_validation
+        self.prepare_cross_validation(sorted_matrix_list)
+
+        # Prepare beta
         self.beta = np.zeros([len(self.unique_classes), len(self.vocabulary)])
-        for c in range(0, len(self.unique_classes)):
-            for ind in range(0, len(self.vocabulary)):
-                self.beta[c, ind] = (counts_of_unique_word[c, ind] + 1)/(np.sum(counts_of_unique_word[c,:]) + len(self.vocabulary))
 
-    def cross_validation(self, cv_data):
+        # Iterate through each fold to calculate beta values and cv
+        for k_iter in range(0, self.kf_split_indices.shape[1]):
+            training_set_x = []
+            training_set_y = []
+            testing_set_x = []
+            testing_set_y = []
+            for c in range(0, len(self.unique_classes)):
+                train_index, test_index = self.kf_split_indices[c][k_iter]
+                training_set_x.append(sorted_matrix_list[c][0][0][train_index])
+                training_set_y.append(sorted_matrix_list[c][1][0][train_index])
+                testing_set_x.extend(sorted_matrix_list[c][0][0][test_index])
+                testing_set_y.extend(sorted_matrix_list[c][1][0][test_index])
+            training_set = np.vstack((training_set_x, training_set_y))
+            testing_set = np.vstack((testing_set_x, testing_set_y))
+            
+            beta = self.calculate_model_coeff(training_set)
+            self.calculate_cross_validation_error(testing_set, beta)
+        
+        # Finally, average self.beta values from all k folds
+        self.beta = np.array(self.beta, dtype='f')
+        self.beta = self.beta/self.k_fold_num
 
-
-    def predict(self, csv_file):
-        # Use the trained classifer to predict class of a given doc
-
-        # Read data
-        timestamps, tweets, _ = self.extract_data(csv_file)
-
-        # Convert 'str1,str2,str3,...' to list[str1, str2, str3,...]
-        tweets = [tweet.split(',') for tweet in tweets]
+    def calculate_cross_validation_error(self, testing_set, beta):
 
         # Calculate likelihood
-        likelihood = np.zeros([len(tweets), len(self.unique_classes)])
-        for t in range(0, len(tweets)):
-            tweet = tweets[t]
+        sentiments = self.calculate_likelihood(testing_set[0,:], beta)
+        ground_truths = list(map(int, testing_set[1,:]))
+        subtraction_result = np.subtract(np.array(sentiments), np.array(ground_truths))
+        misclassification_error = np.count_nonzero(subtraction_result)/testing_set.shape[1]
+        print('misclassification_error:', misclassification_error)
+
+    def calculate_likelihood(self, docs, beta):
+        """
+        Calculate likelihood and return class with highest likelihood for the corresponding document,
+        using the specified beta values.
+
+        Input
+            - docs : lists of lists of words, e.g. [['word_1', 'word_2',...], [...], ...]
+            - beta : beta values to calculate likelihood, 
+                    n x m matrix where n is the number of unique classes of docs, 
+                    and m is the number of vocabulary
+        
+        Output
+            - classes: Class prediction for the corresponding document. List of type int.
+        """
+        # Calculate likelihood
+        likelihood = np.zeros([len(docs), len(self.unique_classes)])
+        for t in range(0, len(docs)):
+            tweet = docs[t]
             likelihood[t, :] = self.pi
             for word in tweet:
                 ind = self.vocabulary.index(word)
                 for c in range(0, len(self.unique_classes)):
-                    likelihood[t, c] *= self.beta[c, ind]
-        sentiments = self.unique_classes[np.argmax(likelihood, axis=1)]
+                    likelihood[t, c] *= beta[c, ind]
+        classes = self.unique_classes[np.argmax(likelihood, axis=1)]
+        return list(map(int, classes))
+
+    def predict(self, csv_file):
+        """
+        Use the trained classifer to predict class of a given csv_file
+        """
+
+        # Read data
+        timestamps, tweets, _ = self.extract_data(csv_file)
+
+        # Calculate sentiments
+        sentiments = self.calculate_likelihood(tweets, self.beta)
 
     def extract_vocabulary(self, tweets):
         """
@@ -126,6 +209,10 @@ class NaiveBayes():
         data = np.array(matrix)
         timestamps = data[:,0]
         tweets = data[:,1]
+
+        # Convert 'str1,str2,str3' to list[str1, str2, str3]
+        tweets = [tweet.split(',') for tweet in tweets]
+
         try:
             sentiments = data[:,2]
         except IndexError:
@@ -135,5 +222,5 @@ class NaiveBayes():
 
 if __name__ == '__main__':
     model = NaiveBayes()
-    model.train_classifer('preprocessed_data/naive_bayes_training_set.csv')
-    model.predict('preprocessed_data/naive_bayes_test_set.csv')
+    model.train_classifer('preprocessed_data/AAPL_stocktwits.csv')
+    # model.predict('preprocessed_data/naive_bayes_test_set.csv')

@@ -40,7 +40,7 @@ class Preprocess_Raw_Tweets():
         for file_list in csv_files:
             matrix = [] # Data matrix that will store all tweets related to one stock
             for file in file_list:
-                print(file)
+                print('Processing ', file)
                 with open(file, 'r') as f:
                     reader = csv.reader(f, delimiter=',')
                     next(reader)
@@ -107,8 +107,9 @@ class Preprocess_Raw_Tweets():
         --------------------
             words        -- list of lowercase "words"
         """
-        # Remove linebreaks and initial ' b' ' in tweets
-        input_string = input_string[2:].replace('\\n', ' ')
+        if not self.is_stocktwits:
+            # Remove linebreaks and initial ' b' ' in tweets
+            input_string = input_string[2:].replace('\\n', ' ')
 
         # To prevent catastraphic backtracking of regex below, take out words that start with https first
         input_substring = input_string.split(' ')
@@ -132,7 +133,7 @@ class Preprocess_Raw_Tweets():
             try:
                 word_list[ind] = stemmer.stem(word)
             except IndexError:
-                print('error', word)
+                print('error stemming word:', word)
         # Remove stop words and punctuations, also discard words that contain non characters
         stop_words = set(stopwords.words('english'))
         word_list = [word for word in word_list if word not in punctuation and word not in stop_words and word.isalpha()]
