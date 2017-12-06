@@ -1,0 +1,5 @@
+created_at,text,sentiment
+2017-12-06T02:25:38Z,"chinese,beijing,chinese",0
+2017-12-06T02:35:16Z,"chinese,chinese,shanghai",0
+2017-12-06T02:38:28Z,"chinese,macao",0
+2017-12-06T02:39:11Z,"tokyo,japan,chinese",1
