@@ -16,8 +16,9 @@ class NaiveBayes():
 
     def prepare_cross_validation(self, sorted_data_matrix):
         """
-        Split sorted training data matrix into k-fold, k == self.k_fold_num
-        NoReturn
+        Split sorted (by class) training data matrix into k-fold, k == self.k_fold_num
+        Using sorted data because want to evenly distribute each class in each training subset.
+        
         """       
         # Split data into kfold
         kf = KFold(n_splits=self.k_fold_num, shuffle=True)
@@ -49,7 +50,15 @@ class NaiveBayes():
         return sorted_matrix_list
 
     def calculate_model_coeff(self, training_set_list):
+        """
+        Input
+            - training_set_list: c x n matrix, where c is the number of unique classes, and n is the number of documents
 
+        Output
+            - beta: c x m matrix where c is the number of unique classes and m is the number of vocabulary
+                This beta could be different from self.beta, since beta is derived from the specified training_set_list,
+                whereas self.beta will eventually become the average beta from all training subsets.
+        """
         # Calculate number of each unique word for each class
         counts_of_unique_word = np.zeros([len(self.unique_classes), len(self.vocabulary)])
         for i in range(0, len(self.unique_classes)):
@@ -68,7 +77,11 @@ class NaiveBayes():
         return beta
 
     def train_classifer(self, training_set_file):
-        # Train the classifer based on training sets in training_set_file
+        """
+        Train text classifier based on a training_set_file
+        Input
+            - training_set_file: a csv file containing [timestamps, documents, classes]
+        """
 
         # Read data
         _, tweets, sentiments = self.extract_data(training_set_file)
@@ -115,12 +128,15 @@ class NaiveBayes():
         self.beta = self.beta/self.k_fold_num
         
         # Misclassification error for the entire training set 
-        # (this error should be discarded, as it does not represent the true misclassification error for classifier)
+        # (this error should be discarded, as it does not represent the true misclassification error for this classifier)
         # But in case you are curious:
         # self.calculate_cross_validation_error(data_matrix, self.beta)
 
     def calculate_cross_validation_error(self, testing_set, beta):
+        """
+        Calculate misclassification error in each k-fold iteration, using the beta values specified
 
+        """
         # Calculate log likelihood
         sentiments = self.calculate_likelihood(testing_set[0,:], beta)
         ground_truths = list(map(int, testing_set[1,:]))
@@ -228,5 +244,5 @@ class NaiveBayes():
 
 if __name__ == '__main__':
     model = NaiveBayes()
-    model.train_classifer('preprocessed_data/AAPL_stocktwits.csv')
+    model.train_classifer('preprocessed_data/GOOG_stocktwits.csv')
     # model.predict('preprocessed_data/naive_bayes_test_set.csv')
