@@ -121,7 +121,7 @@ class NaiveBayes():
 
     def calculate_cross_validation_error(self, testing_set, beta):
 
-        # Calculate likelihood
+        # Calculate log likelihood
         sentiments = self.calculate_likelihood(testing_set[0,:], beta)
         ground_truths = list(map(int, testing_set[1,:]))
         subtraction_result = np.subtract(np.array(sentiments), np.array(ground_truths))
@@ -130,7 +130,7 @@ class NaiveBayes():
 
     def calculate_likelihood(self, docs, beta):
         """
-        Calculate likelihood and return class with highest likelihood for the corresponding document,
+        Calculate log likelihood and return class with highest likelihood for the corresponding document,
         using the specified beta values.
 
         Input
@@ -151,6 +151,7 @@ class NaiveBayes():
                 ind = self.vocabulary.index(word)
                 for c in range(0, len(self.unique_classes)):
                     likelihood[t, c] *= beta[c, ind]
+        likelihood = np.log10(likelihood)
         classes = self.unique_classes[np.argmax(likelihood, axis=1)]
         return list(map(int, classes))
 
