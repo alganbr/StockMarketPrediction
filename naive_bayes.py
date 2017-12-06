@@ -113,6 +113,11 @@ class NaiveBayes():
         # Finally, average self.beta values from all k folds
         self.beta = np.array(self.beta, dtype='f')
         self.beta = self.beta/self.k_fold_num
+        
+        # Misclassification error for the entire training set 
+        # (this error should be discarded, as it does not represent the true misclassification error for classifier)
+        # But in case you are curious:
+        # self.calculate_cross_validation_error(data_matrix, self.beta)
 
     def calculate_cross_validation_error(self, testing_set, beta):
 
@@ -121,7 +126,7 @@ class NaiveBayes():
         ground_truths = list(map(int, testing_set[1,:]))
         subtraction_result = np.subtract(np.array(sentiments), np.array(ground_truths))
         misclassification_error = np.count_nonzero(subtraction_result)/testing_set.shape[1]
-        print('misclassification_error:', misclassification_error)
+        print('Misclassification Error with k-fold cv:', misclassification_error)
 
     def calculate_likelihood(self, docs, beta):
         """
