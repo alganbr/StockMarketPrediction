@@ -75,7 +75,7 @@ class Preprocess_Raw_Tweets():
             created_at = sorted_matrix[:,0]
             processed_tweets = self.preprocess_raw_text_data(sorted_matrix[:, 1])
             processed_tweets = [','.join(tweet) for tweet in processed_tweets]
-            self.write_to_csv(self.stocknames[csv_files.index(file_list)], created_at, processed_tweets) if not self.is_stocktwits else self.write_to_csv(self.stocknames[csv_files.index(file_list)], created_at, processed_tweets, sentiments)
+            self.write_to_csv(self.stocknames[csv_files.index(file_list)], created_at, processed_tweets, sentiments) if self.is_stocktwits else self.write_to_csv(self.stocknames[csv_files.index(file_list)], created_at, processed_tweets, [])
 
     def preprocess_raw_text_data(self, tweets):
         """
@@ -144,10 +144,10 @@ class Preprocess_Raw_Tweets():
         # Write the csv
         with open(csv_name % stockname, 'w') as f:
             writer = csv.writer(f)
-            writer.writerow(['created_at', 'text']) if not self.is_stocktwits else writer.writerow(['created_at', 'text', 'sentiment'])
-            writer.writerows(np.transpose(np.vstack((created_at, processed_tweets)))) if not self.is_stocktwits else writer.writerows(np.transpose(np.vstack((created_at, processed_tweets, sentiment))))
+            writer.writerow(['created_at', 'text', 'sentiment']) if self.is_stocktwits else writer.writerow(['created_at', 'text'])
+            writer.writerows(np.transpose(np.vstack((created_at, processed_tweets, sentiment)))) if self.is_stocktwits else writer.writerows(np.transpose(np.vstack((created_at, processed_tweets))))
         pass
 
 if __name__ == '__main__':
-    prt = Preprocess_Raw_Tweets(True)
+    prt = Preprocess_Raw_Tweets(False)
     prt.preprocess_entries()

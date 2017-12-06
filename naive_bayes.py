@@ -171,7 +171,7 @@ class NaiveBayes():
         classes = self.unique_classes[np.argmax(likelihood, axis=1)]
         return list(map(int, classes))
 
-    def predict(self, csv_file):
+    def predict(self, csv_file, stockname):
         """
         Use the trained classifer to predict class of a given csv_file
         """
@@ -181,6 +181,17 @@ class NaiveBayes():
 
         # Calculate sentiments
         sentiments = self.calculate_likelihood(tweets, self.beta)
+
+        self.write_to_csv(stockname, timestamps, tweets, sentiments)
+
+    def write_to_csv(self, stockname, timestamps, tweets, sentiments):
+        csv_name = 'naive_bayes_labeled_data/%s_stocktwits.csv'
+        # Write the csv
+        with open(csv_name % stockname, 'w') as f:
+            writer = csv.writer(f)
+            writer.writerow(['created_at', 'text', 'sentiment'])
+            writer.writerows(np.transpose(np.vstack((timestamps, tweets, sentiments))))
+        pass
 
     def extract_vocabulary(self, tweets):
         """
@@ -245,4 +256,4 @@ class NaiveBayes():
 if __name__ == '__main__':
     model = NaiveBayes()
     model.train_classifer('preprocessed_data/GOOG_stocktwits.csv')
-    # model.predict('preprocessed_data/naive_bayes_test_set.csv')
+    model.predict('preprocessed_data/naive_bayes_test_set.csv', 'AMZN')
