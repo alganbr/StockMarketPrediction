@@ -63,7 +63,7 @@ def get_trending_stocks():
 # ---------------------------------------------------------------------
 
 def get_relevant_data(json_data):
-    """ Get the timestamp, body message, number of likes, number of reshares, and sentiment as dictionary
+    """ Get the timestamp, body message and sentiment as dictionary
     """
     ret = []
     tweets = json_data['messages']
@@ -71,7 +71,7 @@ def get_relevant_data(json_data):
         print(tweet['id'])
         relevant_data = dict()
         relevant_data['created_at'] = tweet['created_at']
-        relevant_data['text'] = tweet['body'].replace('\n', ' ')
+        relevant_data['text'] = tweet['body'].encode("utf-8").replace('\n', ' ')
         try:
             relevant_data['sentiment'] = tweet['entities']['sentiment']['basic']
         except:
@@ -82,8 +82,8 @@ def get_relevant_data(json_data):
 
 def create_csv(symbol, relevant_data):
     keys = relevant_data[0].keys()
-    with open('%s_stocktwits.csv' % symbol, 'w') as f:
-        dict_writer = csv.DictWriter(f, keys)
+    with open('stocktwits_training_data/%s_stocktwits.csv' % symbol, 'w') as f:
+        dict_writer = csv.DictWriter(f, ['created_at', 'text', 'sentiment'])
         dict_writer.writeheader()
         dict_writer.writerows(relevant_data)
 
@@ -97,7 +97,7 @@ def get_stock_stream_wrapper(symbol, quantity):
     return ret
 
 
-# if __name__ == '__main__':
-#     symbol = 'AMZN'
-#     relevant_data = get_stock_stream_wrapper(symbol, 300)
-#     create_csv(symbol, relevant_data)
+if __name__ == '__main__':
+    symbol = 'MSFT'
+    relevant_data = get_stock_stream_wrapper(symbol, 3000)
+    create_csv(symbol, relevant_data)
