@@ -68,6 +68,7 @@ class Preprocess_Raw_Tweets():
             # Write to csv
             created_at = sorted_matrix[:,0]
             processed_tweets = self.preprocess_raw_text_data(sorted_matrix[:, 1])
+            processed_tweets = [','.join(tweet) for tweet in processed_tweets]
             self.write_to_csv(self.stocknames[csv_files.index(file_list)], created_at, processed_tweets) if not self.is_stocktwits else self.write_to_csv(self.stocknames[csv_files.index(file_list)], created_at, processed_tweets, sentiments)
 
     def preprocess_raw_text_data(self, tweets):
@@ -121,9 +122,9 @@ class Preprocess_Raw_Tweets():
                 word_list[ind] = stemmer.stem(word)
             except IndexError:
                 print('error', word)
-        # Remove stop words and punctuations
+        # Remove stop words and punctuations, also discard words that contain non characters
         stop_words = set(stopwords.words('english'))
-        word_list = [word for word in word_list if word != "" and word not in punctuation and word not in stop_words]
+        word_list = [word for word in word_list if word not in punctuation and word not in stop_words and word.isalpha()]
         return word_list
 
     def write_to_csv(self, stockname, created_at, processed_tweets, sentiment):
