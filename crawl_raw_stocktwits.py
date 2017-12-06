@@ -67,18 +67,20 @@ def get_relevant_data(json_data):
     """
     ret = []
     tweets = json_data['messages']
+    last_id = None
     for tweet in tweets:
-        print(tweet['id'])
         relevant_data = dict()
         relevant_data['created_at'] = tweet['created_at']
-        relevant_data['text'] = tweet['body'].encode("utf-8").replace('\n', ' ')
+        relevant_data['text'] = tweet['body'].replace('\n', ' ')
         try:
             relevant_data['sentiment'] = tweet['entities']['sentiment']['basic']
         except:
             relevant_data['sentiment'] = 'Neutral'
         ret.append(relevant_data)
+        last_id = tweet['id']
+        print(last_id)
 
-    return ret
+    return ret, last_id
 
 def create_csv(symbol, relevant_data):
     keys = relevant_data[0].keys()
@@ -86,16 +88,20 @@ def create_csv(symbol, relevant_data):
         dict_writer = csv.DictWriter(f, ['created_at', 'text', 'sentiment'])
         dict_writer.writeheader()
         dict_writer.writerows(relevant_data)
+    f.close()
 
 def get_stock_stream_wrapper(symbol, quantity):
     ret = []
     last_id = None
     while(quantity > 30):
-        ret += get_relevant_data(get_stock_stream(symbol, params={'max':last_id}))
+        cur_ret, cur_id = get_relevant_data(get_stock_stream(symbol, params={'max':last_id}))
+        if(cur_ret is None): break; #there are no more tweets to stream
+        ret += cur_ret
+        last_id = cur_id
         quantity -= 30
-    ret += get_relevant_data(get_stock_stream(symbol, params={'limit':quantity, 'max':last_id}))
+    cur_ret, cur_id = get_relevant_data(get_stock_stream(symbol, params={'limit':quantity, 'max':last_id}))
+    ret += cur_ret
     return ret
-
 
 if __name__ == '__main__':
     symbol = 'MSFT'
