@@ -13,6 +13,7 @@ class NaiveBayes():
         self.unique_classes = []
         self.kf_split_indices = []
         self.k_fold_num = 10
+        self.misclassification_error_sum = 0
 
     def prepare_cross_validation(self, sorted_data_matrix):
         """
@@ -76,7 +77,7 @@ class NaiveBayes():
                 beta[c, ind] += (counts_of_unique_word[c, ind] + 1)/(np.sum(counts_of_unique_word[c,:]) + len(self.vocabulary)) # Local copy for cv purpose
         return beta
 
-    def train_classifer(self, training_set_file):
+    def train_classifer(self, training_set_file, stock_name):
         """
         Train text classifier based on a training_set_file
         Input
@@ -105,7 +106,7 @@ class NaiveBayes():
         # Prepare beta
         self.beta = np.zeros([len(self.unique_classes), len(self.vocabulary)])
 
-        # Iterate through each fold to calculate beta values and cv
+        # Iterate through each fold to calculate beta values (with smoothing) and cv
         for k_iter in range(0, self.kf_split_indices.shape[1]):
             training_set_x = []
             training_set_y = []
@@ -126,7 +127,7 @@ class NaiveBayes():
         # Finally, average self.beta values from all k folds
         self.beta = np.array(self.beta, dtype='f')
         self.beta = self.beta/self.k_fold_num
-        
+        print(stock_name, ': average misclassification Error is: ', self.misclassification_error_sum/self.k_fold_num)
         # Misclassification error for the entire training set 
         # (this error should be discarded, as it does not represent the true misclassification error for this classifier)
         # But in case you are curious:
@@ -142,6 +143,7 @@ class NaiveBayes():
         ground_truths = list(map(int, testing_set[1,:]))
         subtraction_result = np.subtract(np.array(sentiments), np.array(ground_truths))
         misclassification_error = np.count_nonzero(subtraction_result)/testing_set.shape[1]
+        self.misclassification_error_sum += misclassification_error
         print('Misclassification Error with k-fold cv:', misclassification_error)
 
     def calculate_likelihood(self, docs, beta):
@@ -164,9 +166,13 @@ class NaiveBayes():
             tweet = docs[t]
             likelihood[t, :] = self.pi
             for word in tweet:
-                ind = self.vocabulary.index(word)
-                for c in range(0, len(self.unique_classes)):
-                    likelihood[t, c] *= beta[c, ind]
+                try: 
+                    ind = self.vocabulary.index(word)
+                    for c in range(0, len(self.unique_classes)):
+                        likelihood[t, c] *= beta[c, ind]
+                except ValueError:
+                    # print(word, 'is not in vocabulary -- Ignored')
+                    pass
         likelihood = np.log10(likelihood)
         classes = self.unique_classes[np.argmax(likelihood, axis=1)]
         return list(map(int, classes))
@@ -186,6 +192,7 @@ class NaiveBayes():
 
     def write_to_csv(self, stockname, timestamps, tweets, sentiments):
         csv_name = 'naive_bayes_labeled_data/%s_stocktwits.csv'
+        tweets = [','.join(tweet) for tweet in tweets]
         # Write the csv
         with open(csv_name % stockname, 'w') as f:
             writer = csv.writer(f)
@@ -255,5 +262,9 @@ class NaiveBayes():
 
 if __name__ == '__main__':
     model = NaiveBayes()
-    model.train_classifer('preprocessed_data/GOOG_stocktwits.csv')
-    model.predict('preprocessed_data/naive_bayes_test_set.csv', 'AMZN')
+    training_files = ['preprocessed_data/AAPL_stocktwits.csv', 'preprocessed_data/AMZN_stocktwits.csv', 'preprocessed_data/GOOG_stocktwits.csv', 'preprocessed_data/MSFT_stocktwits.csv']
+    predict_files = ['preprocessed_data/AAPL_tweets.csv', 'preprocessed_data/AMZN_tweets.csv', 'preprocessed_data/GOOG_tweets.csv', 'preprocessed_data/MSFT_tweets.csv']
+    stock_names = ['AAPL', 'AMZN', 'GOOG', 'MSFT']
+    for ind in range(0, len(training_files)):
+        model.train_classifer(training_files[ind], stock_names[ind])
+        model.predict(predict_files[ind], stock_names[ind])
