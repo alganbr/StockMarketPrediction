@@ -29,8 +29,8 @@ created_at,text,sentiment
 2017-11-30T15:03:54Z,"norm,look,aapl,ba,amp,countless,alway,su,greedi,lawyer",1
 2017-11-30T15:04:09Z,"sft,aapl,stupid,buy,thi",0
 2017-11-30T15:05:13Z,apl,0
-2017-11-30T15:07:13Z,"apl,look,beauti,congrat,option,trader,make,tremend,day,aloha",0
 2017-11-30T15:07:13Z,"sla,see,two,compani,togeth,point,blind,blind,aapl,amp,tsla,chang,world",1
+2017-11-30T15:07:13Z,"apl,look,beauti,congrat,option,trader,make,tremend,day,aloha",0
 2017-11-30T15:07:25Z,"apl,veri,nice,behind,fitbit,xiaomi,green",0
 2017-11-30T15:07:35Z,"apl,drone,go",1
 2017-11-30T15:07:41Z,"apl,grind,higher,bullish,flow",1
@@ -185,8 +185,8 @@ created_at,text,sentiment
 2017-11-30T17:23:54Z,"apl,imo,buy,ani,dip,think,veri,short,order,play,call,today,hold",1
 2017-11-30T17:23:55Z,"apl,dialog,share,tank,report,appl,design,power,chip",0
 2017-11-30T17:25:44Z,"b,amzn,aapl,nflx,goog,much,sector,rotat,faang,strong,fundament,get,better,corpor,tax,ralli",0
-2017-11-30T17:26:01Z,"py,qqq,dia,ichan,sour,sold,aapl,hlf",0
 2017-11-30T17:26:01Z,"apl,think",0
+2017-11-30T17:26:01Z,"py,qqq,dia,ichan,sour,sold,aapl,hlf",0
 2017-11-30T17:26:03Z,"updat,aapl,amzn,fb",1
 2017-11-30T17:27:34Z,"apl,guess,thi,go",1
 2017-11-30T17:28:18Z,apl,0
@@ -327,8 +327,8 @@ created_at,text,sentiment
 2017-11-30T19:21:10Z,"apl,peopl,thought,april",0
 2017-11-30T19:24:18Z,"apl,holi,cow,medic,news,huge",1
 2017-11-30T19:24:44Z,"apl,econom,data,rosi,get,global",1
-2017-11-30T19:25:18Z,"apl,rumor,steve,job,might,resign",0
 2017-11-30T19:25:18Z,"apl,tax,repatri,worth,dollar,share",0
+2017-11-30T19:25:18Z,"apl,rumor,steve,job,might,resign",0
 2017-11-30T19:25:36Z,"md,ceo,quot,thanksgiv,sale,amd,system,tripl,compar,last,quot,amd,mindshar,moat,build,nvda,goog,intc,aapl,fb",1
 2017-11-30T19:29:25Z,"apl,amaz,moat,premium,discount",0
 2017-11-30T19:31:06Z,"apl,tomorrow,hoedown,throwdown,short,watch,particip",1
@@ -1004,8 +1004,8 @@ created_at,text,sentiment
 2017-12-01T18:29:28Z,"fd,full,effect,almost,way,back,christma,came,earli,thi,year,thank,flynn,qqq,spi,baba,amzn,aapl,gs",1
 2017-12-01T18:29:39Z,"spi,uvxi,bac,jpm,wfc,aapl,fb,get,tax,vote,monday",-1
 2017-12-01T18:30:10Z,"mzn,aapl,fb,googl,msft,nflx,portfolio,manag,lose,enthusiasm,highfli,tech,stock",0
-2017-12-01T18:30:32Z,"ick,word,long,baba,fslr,aapl,share,go",1
 2017-12-01T18:30:32Z,"c,spi,uvxi,bac,jpm,wfc,aapl,fb,get,tax,vote,monday,bearish",0
+2017-12-01T18:30:32Z,"ick,word,long,baba,fslr,aapl,share,go",1
 2017-12-01T18:31:01Z,"pnl,hit,ani,question,spi,jpm,mu,dia,fb,nflx,aapl,ulta,bac,qqq,mara,vrx,nvda,nugt",1
 2017-12-01T18:31:48Z,"apl,trump,direct,flynn,get,contact,russia,dow,take,share,fight,isi,syria,get,back",0
 2017-12-01T18:32:22Z,"apl,cant,quit",0
@@ -2002,8 +2002,8 @@ created_at,text,sentiment
 2017-12-04T16:37:49Z,"apl,actual,algo,around,must,current,keep,afloat,opposit,imho",-1
 2017-12-04T16:38:09Z,"apl,appl,still,ha,one,major,product,launch,thi,year",0
 2017-12-04T16:38:48Z,"ple,ceo,tim,cook,speak,first,time,tech,confer,china,aapl",0
-2017-12-04T16:39:50Z,"apl,love,thi,fall,buy,everi,drop,gt,boatload,fridayfishfri,befor,christma",1
 2017-12-04T16:39:50Z,"aba,aapl,fb,amzn,say,thi,ha,great,day,scalp",1
+2017-12-04T16:39:50Z,"apl,love,thi,fall,buy,everi,drop,gt,boatload,fridayfishfri,befor,christma",1
 2017-12-04T16:40:03Z,"row,babi,bath,water,tech,last,sever,day,baba,amzn,googl,fb,nflx,aapl,buy,em",0
 2017-12-04T16:40:44Z,"vda,fb,aapl,amd,whi,go",0
 2017-12-04T16:42:12Z,"eri,goog,aapl,fb,amzn,msft",0
@@ -2194,8 +2194,8 @@ created_at,text,sentiment
 2017-12-04T20:51:30Z,"apl,enter,apr,call,tech,look,like,big,time,swing,trade",0
 2017-12-04T20:52:16Z,"apl,keep,sell,head",-1
 2017-12-04T20:52:41Z,"ldman,sach,top,hedg,fund,favorit,one,stock,notic,absent,includ,msft,nxpi,c,amzn,aapl,bac",0
-2017-12-04T20:52:53Z,"apl,mani,day,horizon,thi,one",-1
 2017-12-04T20:52:53Z,"apl,amzn,baba,nvda,shop,sq,pypl,fb,bloodi,day,hope,better,day,tomorrow",1
+2017-12-04T20:52:53Z,"apl,mani,day,horizon,thi,one",-1
 2017-12-04T20:53:08Z,"nd,trade,option,trade,screener,iwm,fb,tol,msft,spi,ge,cnx,aapl,gld,ostk,amd,hbi,lyv,tza,ge",0
 2017-12-04T20:53:54Z,"apl,fb,market,toast",-1
 2017-12-04T20:54:09Z,"py,aapl,damn,smokey",0
@@ -2783,8 +2783,8 @@ created_at,text,sentiment
 2017-12-05T19:34:12Z,"b,spi,gs,amzn,qqq,aapl,market,charact,ha,chang,buy,weak,sell,strength,better,buy,protect,long",0
 2017-12-05T19:35:09Z,"apl,news,alway,best,top,market,go,bear",-1
 2017-12-05T19:41:20Z,"ple,watch,support,appl,pay,cash,aapl",0
-2017-12-05T19:41:30Z,"apl,market,roll",0
 2017-12-05T19:41:30Z,"ple,remain,strong,buy,ipad,imac,demand,pick,say,analyst,aapl,via,benzinga",1
+2017-12-05T19:41:30Z,"apl,market,roll",0
 2017-12-05T19:41:56Z,"apl,yawn,sell,cover,call,back,sleep",0
 2017-12-05T19:42:12Z,"apl,delay,bill,look,uncertain,day",0
 2017-12-05T19:43:13Z,"apl,green,open,short,red,open,buy",0

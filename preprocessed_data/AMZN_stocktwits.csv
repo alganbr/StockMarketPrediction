@@ -289,8 +289,8 @@ created_at,text,sentiment
 2017-11-30T15:32:52Z,"mzn,glad,bought,dip",0
 2017-11-30T15:34:18Z,"sla,fb,amzn,aapl,baba,post,mark,correctli",0
 2017-11-30T15:34:28Z,"mzn,think",0
-2017-11-30T15:34:33Z,"sla,fb,amzn,aapl,baba,lololololololol",0
 2017-11-30T15:34:33Z,"azon,hope,quot,alexa,busi,quot,could,spark,surg,voic,comput,work,place,amzn",1
+2017-11-30T15:34:33Z,"sla,fb,amzn,aapl,baba,lololololololol",0
 2017-11-30T15:34:49Z,"avel,amaz,u,defend,cost,amzn,bought,whole,food,month,back,kudo",0
 2017-11-30T15:35:25Z,"mzn,thi,push,probabl,hit",0
 2017-11-30T15:36:49Z,"baba,wmt,mcd,amzn,smart,money,see,someth,huge,bitcoin",1
@@ -327,8 +327,8 @@ created_at,text,sentiment
 2017-11-30T16:00:47Z,"mzn,prepar,tech,roll,tillerson,tax,bill,news,end,month,tick,wear",-1
 2017-11-30T16:03:03Z,"amzn,fb,big",0
 2017-11-30T16:04:01Z,"mzn,ha,excel,technic,rate,qualiti,setup,onli,medium,moment,price,movem",0
-2017-11-30T16:04:22Z,"sft,goog,f,gm,aapl,amzn,fb,intc,amp,sign,tsla",0
 2017-11-30T16:04:22Z,"aba,everyon,know,baba,suppli,ebay,amzn,good,end,result,thi,one",1
+2017-11-30T16:04:22Z,"sft,goog,f,gm,aapl,amzn,fb,intc,amp,sign,tsla",0
 2017-11-30T16:04:47Z,"ack,friday,cyber,matter,retail,xrt,jcp,bbi,tif,sig,hd,low,amt,amzn",0
 2017-11-30T16:05:55Z,mzn,0
 2017-11-30T16:07:11Z,"raapl,amzn,baba,cmg",0
@@ -557,8 +557,8 @@ created_at,text,sentiment
 2017-11-30T21:02:58Z,"mzn,minut,slight,surg,good,money,plu,sign",0
 2017-11-30T21:03:25Z,"mzn,back,yester,low,xpect",0
 2017-11-30T21:03:48Z,"apl,amzn,pypl,meli,ba,nvda,gd,hd,bzun,fb,beauti,day,woo,hoo",1
-2017-11-30T21:03:59Z,"mzn,fine,day,inde",1
 2017-11-30T21:03:59Z,"ive,crush,ep,estim,anoth,specialti,retail,seemingli,impact,amzn",0
+2017-11-30T21:03:59Z,"mzn,fine,day,inde",1
 2017-11-30T21:04:24Z,"eyondjuic,amzn,tomorrow,friday,sell,profit,taken",-1
 2017-11-30T21:05:05Z,"ot,locker,made,big,share,repurchas,fl,dk,bgfv,hibb,cab,amzn",1
 2017-11-30T21:05:43Z,"ps,holiday,come,lot,amzn,prime,box,need,ship",1
@@ -1047,8 +1047,8 @@ created_at,text,sentiment
 2017-12-01T15:49:40Z,"mzn,republican,tax,bill,head,senat,vote,live,updat",0
 2017-12-01T15:50:47Z,"mzn,tax,vote,shape,day,today,folk",0
 2017-12-01T15:53:16Z,"search,yield,ntnx,aapl,fb,twtr,nflx,baba,amzn,msft,xom,qqq,intc,spi,ge,bac,ziop,di",0
-2017-12-01T15:54:14Z,"mzn,oil,benchmark,gain,deal,extend,output,curb",0
 2017-12-01T15:54:14Z,"mzn,cours,amazon,wont,buy,rad,would,chweaper,distribut,onlin,need,anoth,brick,mortar,especi,lose,rad",0
+2017-12-01T15:54:14Z,"mzn,oil,benchmark,gain,deal,extend,output,curb",0
 2017-12-01T15:57:34Z,"mzn,tsla",0
 2017-12-01T15:58:10Z,"mzn,gop,leader,say,enough,vote,pass,tax,bill",0
 2017-12-01T16:00:38Z,"tm,amzn,work,togeth,huge,deal,stm",1
@@ -1973,8 +1973,8 @@ created_at,text,sentiment
 2017-12-04T15:15:00Z,"th,amzn,market,cap,bln,insan,daili,vol,even,mod,rotat,quot,small,quot,retail,like,send,stratospher",0
 2017-12-04T15:15:13Z,"mzn,guy,amazon",1
 2017-12-04T15:15:26Z,"aba,nvda,swk,aapl,adi,mu,amd,msft,pypl,nglx,fb,snap,amzn,fnsr,qcom",0
-2017-12-04T15:15:43Z,"mzn,nasdaq,pleas,make,higher,low",0
 2017-12-04T15:15:43Z,"mzn,add",0
+2017-12-04T15:15:43Z,"mzn,nasdaq,pleas,make,higher,low",0
 2017-12-04T15:16:26Z,"mzn,wtf,tech,deep,sheit",0
 2017-12-04T15:17:11Z,"u,googl,orcl,elli,nvda,atvi,amzn,intc,msft,thought,go,happi,tax,cut",0
 2017-12-04T15:18:56Z,"mzn,low,thi,biggest,sell,wa,biggest,time,one,wa,bar,fri",0
@@ -2300,8 +2300,8 @@ created_at,text,sentiment
 2017-12-04T19:52:38Z,"baba,fb,amzn,bzun,plan,europ,expans,jd,baba,jd,bil,market,bagger",1
 2017-12-04T19:53:06Z,"nh,amzn,could,impact,cv,aet,merger,pmr,rth,ihf,etf,could,benefit",0
 2017-12-04T19:54:37Z,"mzn,yawnnnnn,bore,tute,hf,get,f,outta",1
-2017-12-04T19:55:49Z,"mzn,go,eod,ralli,baghold,get,though",0
 2017-12-04T19:55:49Z,"mzn,one,day,care,anyon,hold,long,time,veri,bore,care",1
+2017-12-04T19:55:49Z,"mzn,go,eod,ralli,baghold,get,though",0
 2017-12-04T19:56:25Z,"mzn,bezo,still,richest,man",1
 2017-12-04T19:57:23Z,"mzn,oh,make,mistak,start,short,posit,becaus,regret",1
 2017-12-04T19:57:53Z,"mzn,hope,eod,selloff,tht,wuld,ugli",0
@@ -2822,8 +2822,8 @@ created_at,text,sentiment
 2017-12-05T20:12:46Z,mzn,0
 2017-12-05T20:13:01Z,"ny,larg,fund,highli,bullish,cloud,disrupt,msft,amzn,baba",0
 2017-12-05T20:14:47Z,"mzn,rip,catalyst",0
-2017-12-05T20:15:04Z,"b,aapl,nvda,mu,amzn,atvi,sq,nflx,baba,recov,loss,today,bad,stay,green,love,children,baba,got,chill",0
 2017-12-05T20:15:04Z,"pw,guy,realli,think,amzn,would,let,deal,leak,amazon,back,ah",1
+2017-12-05T20:15:04Z,"b,aapl,nvda,mu,amzn,atvi,sq,nflx,baba,recov,loss,today,bad,stay,green,love,children,baba,got,chill",0
 2017-12-05T20:16:56Z,"idea,amzn,amazon,buy,us",0
 2017-12-05T20:17:40Z,"apl,amzn,baba,cat,di,fb,goog,jnj,mu,pypl,selloff,close,bad,week,expect,strong,close,nope",1
 2017-12-05T20:18:28Z,"mzn,googl,goog,hit,cnbc",0

@@ -45,8 +45,10 @@ class Preprocess_Raw_Tweets():
                     reader = csv.reader(f, delimiter=',')
                     next(reader)
                     for row in reader:
-                        print(row)
-                        matrix.append(row)
+                        try:
+                            matrix.append(row)
+                        except csv.Error as e:
+                            print(e)
     
             # Avoid duplicate entries
             matrix = np.vstack({tuple(row) for row in matrix})
