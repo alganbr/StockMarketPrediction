@@ -1,8 +1,8 @@
 # naive_bayes.py
 # Created by Elaine Lin 12/5/17
 
-import numpy as np
 import csv
+import numpy as np
 from sklearn.model_selection import KFold
 
 class NaiveBayes():
