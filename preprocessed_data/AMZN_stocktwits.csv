@@ -1,0 +1,31 @@
+created_at,text,sentiment
+2017-12-06T01:26:55Z,"['mzn', 'sold', 'goodby']",-1
+2017-12-06T01:29:20Z,"['coscil', '🔻', 'lt', '50d', 'fb', 'goog', 'nvda', 'flex', 'sne', 'soxx', 'nflx', 'macd', 'bear❌', 'amzn', 'msft', 'amat', 'aapl', '🔻', 'lt', '200d', 'hrb']",-1
+2017-12-06T01:32:45Z,"['mzn', 'got', 'thi', 'morn', 'go', 'wait', 'retrac', 'back', 'love']",0
+2017-12-06T01:33:25Z,"['mzn', 'googl', 'pull', 'youtub', 'amazon', 'devic', 'escal', 'spat', 'goog', 'googl']",0
+2017-12-06T01:37:14Z,"['ot', 'locker', 'made', 'big', 'share', 'repurchas', 'q3', 'fl', 'dk', 'bgfv', 'hibb', 'cab', 'amzn']",1
+2017-12-06T01:42:08Z,"['ke', 'advantag', 'thi', 'weak', 'amazon', 'amzn', 'look', 'undervalu', '1220']",1
+2017-12-06T01:42:32Z,"['qq', 'play', 'bounc', 'tech', 'w/', 'baba', 'call', 'open', '370', 'ran', '800+', 'fb', 'amzn', 'googl', 'nflx', 'bounc', 'studi']",0
+2017-12-06T01:44:05Z,"['qq', 'five', 'minut', 'trade', 'work', 'baba', 'fb', 'nflx', 'aapl', 'amzn', 'uvxi', 'spx', 'spi', '39', 'crazi', 'good', 'work']",0
+2017-12-06T01:57:02Z,"['pw', 'fake', 'amzn', 'news', 'wa', 'put', 'clay', 'make', 'lot', 'money', 'tomorrow', '39', 'true']",0
+2017-12-06T02:05:47Z,"['chnolog', '39', 'hold', 'ralli', 'stock', 'price', 'continu', 'fade', 'spi', 'spx', 'mu', 'nvda', 'soxx', 'avgo', 'amzn', 'tsla', 'jpm']",0
+2017-12-06T02:12:56Z,"['davideinhorn', 'greenlight', 'capit', 'paradigm', 'shift', 'amzn', 'tsla', 'nflx', '\u202c']",0
+2017-12-06T02:15:15Z,"['mzn', 'analyst', 'estim', 'expect', '36.95', 'yoy', 'revenu', 'growth', 'q4', '33.72', 'q3', 'report', '02/01', 'amc']",0
+2017-12-06T02:22:49Z,"['w', 'video', 'stock', 'analysi', 'trade', 'idea', 'aapl', 'amzn', 'googl', 'bidu', 'baba', 'fb', 'nvda', 'click', 'link', 'gt']",0
+2017-12-06T02:35:16Z,"['vanguard', 'fund', 'emul', 'amp', 'p', '500', 'spi', 'voo', 'amzn', 'msft', 'aapl', 'amzn', 'jnj']",0
+2017-12-06T02:42:17Z,"['mzn', 'check', 'free', 'social', 'network', 'investor', 'call', 'socialwallstreet', 'com', 'chat', 'investor']",0
+2017-12-06T02:51:59Z,"['mzn', 'thought', 'ostk', 'buyout', 'crypto', 'url', 'attain', 'tzero', 'launch', '12/18', 'ostk', 'buyout', 'rumor', 'wa', 'throw', 'dart', '...']",0
+2017-12-06T02:55:55Z,"['lit', '🔥🔥', 'ltc.x', '👈', 'btc.x', 'iot.x', 'amd', 'nvda', 'intc', 'amzn']",0
+2017-12-06T02:56:13Z,"['e', 'spat', 'amzn', 'googl', 'goog', 'mean', 'amp', 'depart', 'look', 'buy', 'roku', 'eventu', 'sooner', 'later']",1
+2017-12-06T03:13:05Z,"['py', 'qqq', 'amzn', 'fb', 'best', 'class', 'tech', 'need', 'buy', 'thi', 'rotat']",1
+2017-12-06T03:16:06Z,"['py', 'qqq', 'amzn', 'fb']",0
+2017-12-06T03:17:15Z,"['mzn', 'check', 'myo', 'big', 'thing', 'happen']",0
+2017-12-06T03:17:53Z,"['py', 'qqq', 'amzn', 'fb', '39', 'call', 'head', '-n-shoulder', 'sunshin', 'smart', 'money', 'sell', 'fluff', 'narrat', 'specul']",0
+2017-12-06T03:19:55Z,"['vda', 'aapl', 'googl', 'spi', 'amzn', 'individu', 'option', 'entir', 'option', 'chain', 'specif', 'exp', 'date', 'track', 'soon', '..']",0
+2017-12-06T03:23:16Z,"['mzn', 'put', '20,000', 'amazon', 'tomorrow', '...', '...', 'kind', 'day', 'would', '🤔😁']",1
+2017-12-06T03:27:54Z,"['u', '39', 'believ', 'amzn', '39', 'latest', 'idea', 'save', 'money', 'latest', 'tactic', 'war', 'goog']",0
+2017-12-06T03:36:26Z,"['mzn', 'amazon', 'caught', 'sell', 'counterfeit', 'part']",0
+2017-12-06T04:07:34Z,"['mzn', 'amazon.com', 'inc', 'show', 'strong', '50.33', 'gain', 'sinc', '12', 'month', 'ago', 'amzn']",0
+2017-12-06T04:07:37Z,"['b', 'open', 'rang', 'trade', 'exampl', 'fb', 'use', 'fang', 'fb', 'amzn', 'nflx', 'googl']",0
+2017-12-06T04:10:56Z,"['py', 'fib', 'webinar', 'use', 'uvxi', 'vxx', 'appl', 'baba', 'amzn', 'tsla', 'msft', 'fslr']",0
+2017-12-06T04:11:57Z,"['py', 'uvxi', 'vxx', 'appl', 'baba', 'amzn', 'tsla', 'msft', 'fslr']",0

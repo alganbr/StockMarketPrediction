@@ -1,0 +1,31 @@
+created_at,text,sentiment
+2017-12-06T02:25:38Z,"['apl', 'fb', 'technic', 'analysi', 'studi', 'highflyer']",0
+2017-12-06T02:35:16Z,"['vanguard', 'fund', 'emul', 'amp', 'p', '500', 'spi', 'voo', 'amzn', 'msft', 'aapl', 'amzn', 'jnj']",0
+2017-12-06T02:38:28Z,"['apl', 'bought', 'aapl', '12/08', '170', 'call', '1.25']",0
+2017-12-06T02:39:11Z,"['apl', 'fb', 'yay', 'futur', 'drop', 'fast', 'love']",-1
+2017-12-06T02:41:08Z,"['apl', 'check', 'free', 'social', 'network', 'investor', 'call', 'socialwallstreet', 'com', 'stop', 'anytim']",0
+2017-12-06T02:55:33Z,"['vda', 'rvnc', 'sbux', 'spi', 'aapl', 'fb', 'snap', 'fkn', 'typic', 'subscript', '“paid', 'education”', 'new', 'account', 'st', 'pictur', 'houses/car', 'websit']",0
+2017-12-06T02:57:06Z,"['apl', 'pain', 'tomorrow', 'jesu']",0
+2017-12-06T03:00:57Z,"['apl', 'w', 'f', '160', 'way']",0
+2017-12-06T03:02:22Z,"['apl', 'unreal', 'market', 'fade', 'still', 'bought', 'stock', 'dumb', 'thi', 'bs', 'crash', 'stupid', 'congress']",0
+2017-12-06T03:11:22Z,"['predict', 'wall', 'st', 'manipul', 'stock', 'price', 'maxim', 'option', 'opex', 'max', 'pain', 'dec', '15', 'aapl', '170', 'goog', '1,000', 'sq', '38']",0
+2017-12-06T03:11:37Z,"['apl', 'lrcx', 'avgo', 'mu', 'much', 'santa', 'ralli', 'think', 'make', 'histori', 'thi', 'year', 'crash', 'decemb']",0
+2017-12-06T03:15:06Z,"['apl', 'quot', 'santa', 'ralli', 'quot', 'mayb', 'thi', 'take', 'thi', 'week', 'next', 'week', 'ralli', 'start']",0
+2017-12-06T03:16:12Z,"['artianmoneyhunt', 'stocksjohnson', 'hold', '50k', 'aapl', 'avgo', 'mu', 'lrcx', 'thi', 'suck']",0
+2017-12-06T03:19:55Z,"['vda', 'aapl', 'googl', 'spi', 'amzn', 'individu', 'option', 'entir', 'option', 'chain', 'specif', 'exp', 'date', 'track', 'soon', '..']",0
+2017-12-06T03:23:08Z,"['apl', 'market-wid', 'rank', '27', 'short', 'volum', '-4', 'yesterday', '23', 'short', 'volum', 'decreas']",0
+2017-12-06T03:24:52Z,"['dstocktwit', 'stocksjohnson', 'aapl', 'avgo', 'fine']",0
+2017-12-06T03:28:52Z,"['thing', 'aapl', 'doe', 'right']",0
+2017-12-06T03:35:24Z,"['b', 'aapl', 'check', 'quot', 'netflix', 'appl', 'facebook', '39', 'go', 'much', 'lower', 'quot', 'yahoo', 'financ']",0
+2017-12-06T03:40:46Z,"['py', 'qqq', 'iwm', 'aapl', 'fb', 'amd', 'sunedison', 'stori', 'wall', 'street', 'greed', 'fear']",0
+2017-12-06T03:51:01Z,"['apl', 'learn', 'onli', 'one', 'thing', 'never', 'hold', 'option', 'overnight']",0
+2017-12-06T03:51:31Z,"['ili', 'report', 'spi', 'iwm', 'qqq', 'gld', 'tlt', 'aapl']",0
+2017-12-06T03:52:58Z,"['apl', '39', '259', 'ipad', 'need', 'know']",0
+2017-12-06T03:55:43Z,"['tocksjohnson', 'martianmoneyhunt', 'yeah', 'ok', 'avgo', 'aapl', 'mu', '39', 'feel', 'bad', 'hold', 'lrcx', 'loooong']",0
+2017-12-06T03:56:56Z,"['apl', 'naz', 'look', 'ugli', 'tonight', 'feel', 'short', 'term', 'call', 'holder', 'gon', 'na', 'take', 'beat', 'tomorrow', 'look', 'like', 'prais', 'trumptaxcut']",0
+2017-12-06T03:58:07Z,"['apl', 'trumptaxcut', 'sound', 'like', 'dinosaur']",0
+2017-12-06T03:58:10Z,"['apl', 'asia', 'market', 'get', 'slam', 'meanwhil', 'bitcoin', 'set', 'anoth', 'high', 'lol', 'thi', 'end', 'well']",0
+2017-12-06T03:59:32Z,"['apl', 'bottom', 'channel', 'line', '160', 'seem', 'within', 'reach', 'load', 'put', 'cheap']",0
+2017-12-06T04:02:19Z,"['apl', '20ma', 'start', 'go', 'bearish', 'pattern', 'could', 'form', 'buy', 'stop', 'abov', '20ma', 'bearish', '50ma']",-1
+2017-12-06T04:03:01Z,"['apl', '39', 'gon', 'na', 'buy', 'si', 'murphi', '39', 'irish', 'red', 'watch', 'aapl', 'final', 'throw', 'death', 'spiral', '6', 'cash', 'irish', 'wow']",-1
+2017-12-06T04:10:11Z,"['apl', 'hope', '39', 'gap', 'much', 'wan', 'na', 'scoop', 'earli', 'morn', 'put']",-1
