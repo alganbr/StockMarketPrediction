@@ -191,7 +191,7 @@ class NaiveBayes():
         self.write_to_csv(stockname, timestamps, tweets, sentiments)
 
     def write_to_csv(self, stockname, timestamps, tweets, sentiments):
-        csv_name = 'naive_bayes_labeled_data/%s_stocktwits.csv'
+        csv_name = 'naive_bayes_labeled_data/%s_tweets.csv'
         tweets = [','.join(tweet) for tweet in tweets]
         # Write the csv
         with open(csv_name % stockname, 'w') as f:
