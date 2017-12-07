@@ -77,6 +77,12 @@ def calculate_sentiment_percentages(timestamps, tweets, sentiments):
         res.append(percentages)
     return np.array(res)
 
+def normalize(data):
+    normalized_data = np.ones(data.shape)
+    for i in range(1, data.shape[1]):
+        normalized_data[:,i] = (data[:,i] - data[:,i].mean())/data[:,i].std()
+    return normalized_data
+
 def represent_data(symbol):
     djia_data = extract_stock_prices('raw_data/stock_prices.csv', symbol)
     timestamps, tweets, sentiments = extract_naive_bayes_data('naive_bayes_labeled_data/{}_tweets.csv'.format(symbol))
@@ -95,6 +101,9 @@ def represent_data(symbol):
     # convert to float
     X = np.array(X, dtype=float)
     y = np.array(y, dtype=float)
+
+    # normalize data
+    X = normalize(X)
 
     return X, y
 
