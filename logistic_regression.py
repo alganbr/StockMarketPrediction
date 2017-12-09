@@ -10,6 +10,9 @@ import matplotlib.pyplot as plt
 from sklearn.cross_validation import StratifiedKFold
 from sklearn import metrics
 
+import warnings
+warnings.filterwarnings('ignore') # ignore warning for metric evaluation 
+
 class LogisticRegression():
 
     def __init__(self):
@@ -68,8 +71,8 @@ class LogisticRegression():
 def performance(y_true, y_pred, metric="accuracy"):
     # map continuous-valued predictions to binary labels
     y_label = y_pred
-    y_label[y_label>0.5] = 1
-    y_label[y_label<=0.5] = 0
+    y_label[y_label>=0.5] = 1
+    y_label[y_label<0.5] = 0
     
     if metric == "accuracy":
         return metrics.accuracy_score(y_true, y_label)
@@ -113,12 +116,16 @@ def performance_test(clf, X, y, metric="accuracy"):
     return score
 
 if __name__ == '__main__':
-    X, y = dp.represent_data('MSFT')
-    split = int(len(X)/10 * 8) # 80% training data 20% test data
-    clf = LogisticRegression()
+    symbols = ['AAPL', 'AMZN', 'GOOG', 'MSFT']
+    for symbol in symbols:
+        print("Evaluating stock prediction for {}".format(symbol))
+        X, y = dp.represent_data(symbol)
+        split = int(len(X)/10 * 8) # 80% training data 20% test data
+        clf = LogisticRegression()
 
-    # evaluation
-    kf = StratifiedKFold(y=y, n_folds=5)
-    metric_list = ["accuracy", "f1_score", "auroc", "precision", "sensitivity", "specificity"]
-    for metric in metric_list:
-        cv_performance(clf=clf, X=X, y=y, kf=kf, metric=metric)
+        # evaluation
+        kf = StratifiedKFold(y=y, n_folds=5)
+        metric_list = ["accuracy", "f1_score", "auroc", "precision", "sensitivity", "specificity"]
+        for metric in metric_list:
+            cv_performance(clf=clf, X=X, y=y, kf=kf, metric=metric)
+        print("")
