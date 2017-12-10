@@ -1,3 +1,4 @@
+import sys
 import math
 import numpy
 import data_preparation
@@ -42,7 +43,10 @@ def sentiment_sum(timestamps, sentiments):
 	return data
 
 if __name__ == '__main__':
-	symbol = 'MSFT' #Add parameters later
+	if len(sys.argv) == 1:
+		print("No argument given, stock code required");
+		exit()
+	symbol = sys.argv[1]
 	djia_data = data_preparation.extract_stock_prices('raw_data/stock_prices.csv', symbol)
 	timestamps, tweets, sentiments = data_preparation.extract_naive_bayes_data('naive_bayes_labeled_data/{}_tweets.csv'.format(symbol))
 	sentiment_totals = sentiment_sum(timestamps, sentiments)
