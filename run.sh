@@ -1,8 +1,7 @@
 #!/bin/bash
 
-python ./preprocessing_raw_data.py
-python ./naive_bayes.py
-python ./logistic_regression.py
-python ./svm.py AAPL
-python ./svm.py MSFT
+python3 ./naive_bayes.py
+python3 ./logistic_regression.py
+python3 ./svm.py AAPL
+python3 ./svm.py MSFT
 

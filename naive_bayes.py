@@ -267,4 +267,4 @@ if __name__ == '__main__':
     for ind in range(0, len(training_files)):
         model = NaiveBayes()
         model.train_classifer(training_files[ind], stock_names[ind])
-        model.predict(predict_files[ind], stock_names[ind]) # Comment this line if you do not need to classify raw tweets
+        # model.predict(predict_files[ind], stock_names[ind]) # Uncomment this line if you need to classify raw tweets
