@@ -17,8 +17,10 @@ import datetime
 class Preprocess_Raw_Tweets():
 
     def __init__(self, is_stocktwits):
-        self.directories = ['../data/raw_data/AAPL_tweets', '../data/raw_data/GOOG_tweets', '../data/raw_data/MSFT_tweets'] if not is_stocktwits else ['../data/stocktwits_training_data/AAPL_stocktwits', '../data/stocktwits_training_data/GOOG_stocktwits', '../data/stocktwits_training_data/MSFT_stocktwits']
-        self.stocknames = ['AAPL','GOOG', 'MSFT']
+        # self.directories = ['../data/raw_data/AAPL_tweets', '../data/raw_data/GOOG_tweets', '../data/raw_data/MSFT_tweets'] if not is_stocktwits else ['../data/stocktwits_training_data/AAPL_stocktwits', '../data/stocktwits_training_data/GOOG_stocktwits', '../data/stocktwits_training_data/MSFT_stocktwits']
+        # self.stocknames = ['AAPL','GOOG', 'MSFT']
+        self.directories = ['../data/raw_data/GOOG_tweets'] if not is_stocktwits else ['../data/stocktwits_training_data/AAPL_stocktwits', '../data/stocktwits_training_data/GOOG_stocktwits', '../data/stocktwits_training_data/MSFT_stocktwits']
+        self.stocknames = ['GOOG']
         self.time_format = "%Y-%m-%d %H:%M:%S" if not is_stocktwits else "%Y-%m-%dT%H:%M:%SZ"
         self.literals = self.prepare_literals()
         self.is_stocktwits = is_stocktwits

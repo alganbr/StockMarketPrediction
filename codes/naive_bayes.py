@@ -191,7 +191,7 @@ class NaiveBayes():
         self.write_to_csv(stockname, timestamps, tweets, sentiments)
 
     def write_to_csv(self, stockname, timestamps, tweets, sentiments):
-        csv_name = 'naive_bayes_labeled_data/%s_tweets.csv'
+        csv_name = '../data/naive_bayes_labeled_data/%s_tweets.csv'
         tweets = [','.join(tweet) for tweet in tweets]
         # Write the csv
         with open(csv_name % stockname, 'w') as f:
@@ -261,10 +261,13 @@ class NaiveBayes():
         return timestamps, tweets, sentiments
 
 if __name__ == '__main__':
-    training_files = ['../data/preprocessed_data/AAPL_stocktwits.csv', '../data/preprocessed_data/GOOG_stocktwits.csv', '../data/preprocessed_data/MSFT_stocktwits.csv']
-    predict_files = ['../data/preprocessed_data/AAPL_tweets.csv', '../data/preprocessed_data/GOOG_tweets.csv', '../data/preprocessed_data/MSFT_tweets.csv']
-    stock_names = ['AAPL', 'GOOG', 'MSFT']
+    # training_files = ['../data/preprocessed_data/AAPL_stocktwits.csv', '../data/preprocessed_data/GOOG_stocktwits.csv', '../data/preprocessed_data/MSFT_stocktwits.csv']
+    # predict_files = ['../data/preprocessed_data/AAPL_tweets.csv', '../data/preprocessed_data/GOOG_tweets.csv', '../data/preprocessed_data/MSFT_tweets.csv']
+    # stock_names = ['AAPL', 'GOOG', 'MSFT']
+    training_files = ['../data/preprocessed_data/GOOG_stocktwits.csv']
+    predict_files = ['../data/preprocessed_data/GOOG_tweets.csv']
+    stock_names = ['GOOG']
     for ind in range(0, len(training_files)):
         model = NaiveBayes()
         model.train_classifer(training_files[ind], stock_names[ind])
-        # model.predict(predict_files[ind], stock_names[ind]) # Uncomment this line if you need to classify raw tweets
+        model.predict(predict_files[ind], stock_names[ind]) # Uncomment this line if you need to classify raw tweets

@@ -10,6 +10,7 @@
 - raw_data\
 \
 Tweets collected with Twitter API. Sentiment unlabeled.\
+Also included stock_prices.csv for DJIA and daily closing prices of chosen stocks.\
 \
 - stocktwits_training_data\
 \
