@@ -1,9 +1,9 @@
-import sys
 import math
 import numpy
 import data_preparation
 from sklearn import svm
 from sklearn import metrics
+import sys
 
 class SVM():
 	def __init__(self,X,y):
@@ -70,11 +70,14 @@ if __name__ == '__main__':
 	y = numpy.array(y, dtype=float)
 	
 	split = int(len(X)/10 * 8) # 80% training data 20% test data
+	if split == 0:
+		split += 1
 	clf = SVM(X[0:split],y[0:split])
 	
 	y_true = y[split+1:]
 	y_label = clf.predict(X[split+1:])
-
+	
+	print("Evaluating stock prediction for {:s}".format(symbol))
 	print("accuracy: {:f}".format(metrics.accuracy_score(y_true, y_label)))
 	print("f1_score: {:f}".format(metrics.f1_score(y_true, y_label)))
 	print("auroc: {:f}".format(metrics.roc_auc_score(y_true, y_label)))
