@@ -14,4 +14,5 @@ echo "Running SVM for stock price prediction model"
 echo ""
 python3 ./svm.py AAPL
 python3 ./svm.py MSFT
+python3 ./svm.py GOOG
 
