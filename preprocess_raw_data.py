@@ -17,8 +17,8 @@ import datetime
 class Preprocess_Raw_Tweets():
 
     def __init__(self, is_stocktwits):
-        self.directories = ['raw_data/AAPL_tweets', 'raw_data/GOOG_tweets', 'raw_data/MSFT_tweets', 'raw_data/AMZN_tweets'] if not is_stocktwits else ['stocktwits_training_data/AAPL_stocktwits', 'stocktwits_training_data/GOOG_stocktwits', 'stocktwits_training_data/MSFT_stocktwits', 'stocktwits_training_data/AMZN_stocktwits']
-        self.stocknames = ['AAPL','GOOG', 'MSFT', 'AMZN']
+        self.directories = ['raw_data/AAPL_tweets', 'raw_data/GOOG_tweets', 'raw_data/MSFT_tweets'] if not is_stocktwits else ['stocktwits_training_data/AAPL_stocktwits', 'stocktwits_training_data/GOOG_stocktwits', 'stocktwits_training_data/MSFT_stocktwits']
+        self.stocknames = ['AAPL','GOOG', 'MSFT']
         self.time_format = "%Y-%m-%d %H:%M:%S" if not is_stocktwits else "%Y-%m-%dT%H:%M:%SZ"
         self.literals = self.prepare_literals()
         self.is_stocktwits = is_stocktwits

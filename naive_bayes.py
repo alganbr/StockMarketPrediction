@@ -261,9 +261,9 @@ class NaiveBayes():
         return timestamps, tweets, sentiments
 
 if __name__ == '__main__':
-    training_files = ['preprocessed_data/AAPL_stocktwits.csv', 'preprocessed_data/AMZN_stocktwits.csv', 'preprocessed_data/GOOG_stocktwits.csv', 'preprocessed_data/MSFT_stocktwits.csv']
-    predict_files = ['preprocessed_data/AAPL_tweets.csv', 'preprocessed_data/AMZN_tweets.csv', 'preprocessed_data/GOOG_tweets.csv', 'preprocessed_data/MSFT_tweets.csv']
-    stock_names = ['AAPL', 'AMZN', 'GOOG', 'MSFT']
+    training_files = ['preprocessed_data/AAPL_stocktwits.csv', 'preprocessed_data/GOOG_stocktwits.csv', 'preprocessed_data/MSFT_stocktwits.csv']
+    predict_files = ['preprocessed_data/AAPL_tweets.csv', 'preprocessed_data/GOOG_tweets.csv', 'preprocessed_data/MSFT_tweets.csv']
+    stock_names = ['AAPL', 'GOOG', 'MSFT']
     for ind in range(0, len(training_files)):
         model = NaiveBayes()
         model.train_classifer(training_files[ind], stock_names[ind])

@@ -116,7 +116,7 @@ def performance_test(clf, X, y, metric="accuracy"):
     return score
 
 if __name__ == '__main__':
-    symbols = ['AAPL', 'AMZN', 'GOOG', 'MSFT']
+    symbols = ['AAPL', 'GOOG', 'MSFT']
     for symbol in symbols:
         print("Evaluating stock prediction for {}".format(symbol))
         X, y = dp.represent_data(symbol)
