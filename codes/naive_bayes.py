@@ -261,13 +261,10 @@ class NaiveBayes():
         return timestamps, tweets, sentiments
 
 if __name__ == '__main__':
-    # training_files = ['../data/preprocessed_data/AAPL_stocktwits.csv', '../data/preprocessed_data/GOOG_stocktwits.csv', '../data/preprocessed_data/MSFT_stocktwits.csv']
-    # predict_files = ['../data/preprocessed_data/AAPL_tweets.csv', '../data/preprocessed_data/GOOG_tweets.csv', '../data/preprocessed_data/MSFT_tweets.csv']
-    # stock_names = ['AAPL', 'GOOG', 'MSFT']
-    training_files = ['../data/preprocessed_data/GOOG_stocktwits.csv']
-    predict_files = ['../data/preprocessed_data/GOOG_tweets.csv']
-    stock_names = ['GOOG']
+    training_files = ['../data/preprocessed_data/AAPL_stocktwits.csv', '../data/preprocessed_data/GOOG_stocktwits.csv', '../data/preprocessed_data/MSFT_stocktwits.csv']
+    predict_files = ['../data/preprocessed_data/AAPL_tweets.csv', '../data/preprocessed_data/GOOG_tweets.csv', '../data/preprocessed_data/MSFT_tweets.csv']
+    stock_names = ['AAPL', 'GOOG', 'MSFT']
     for ind in range(0, len(training_files)):
         model = NaiveBayes()
         model.train_classifer(training_files[ind], stock_names[ind])
-        model.predict(predict_files[ind], stock_names[ind]) # Uncomment this line if you need to classify raw tweets
+        # model.predict(predict_files[ind], stock_names[ind]) # Uncomment this line if you need to classify raw tweets
