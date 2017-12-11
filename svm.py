@@ -4,6 +4,9 @@ import data_preparation
 from sklearn import svm
 from sklearn import metrics
 import sys
+import warnings
+
+warnings.filterwarnings('ignore') # ignore warning for metric evaluation 
 
 class SVM():
 	def __init__(self,X,y):
