@@ -56,7 +56,6 @@ if __name__ == '__main__':
 	
 	djia_data = numpy.array(djia_data)
 	dates = sentiment_totals.keys()
-	dates.sort()
 	djia_refined = []
 	for i in range(len(djia_data)):
 		if djia_data[i,0] in dates:
@@ -72,7 +71,7 @@ if __name__ == '__main__':
 	X = numpy.array(X, dtype=float)
 	y = numpy.array(y, dtype=float)
 	
-	split = int(len(X)/10 * 8) # 80% training data 20% test data
+	split = int(len(X)/10 * 6) # 80% training data 20% test data
 	if split == 0:
 		split += 1
 	clf = SVM(X[0:split],y[0:split])
